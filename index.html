@@ -5,35 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Neighborhood Map</title>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 	<div>
 		<h1>All the World's a Stage</h1>
 		<!--<select data-bind = "options: placeTypes, click: $data.updateVisibles, value: chosenType"></select> -->
-		<input placeholder="Search..." type="search" data-bind="textInput: 'query', event: {keyup: $data.filter}">
+		<input class="search" placeholder="Search..." type="search" data-bind="textInput: $root.query, event: {keyup: $data.filter}">
 		<ul data-bind="foreach: theaterList">
-			<li data-bind="text: name, click: $parent.setTheater">A.C.T</li>
-			<li data-bind="text: name, click: $parent.setTheater">Lorraine Hansberry Theater</li>
-			<li data-bind="text: name, click: $parent.setTheater">The Marsh</li>
-			<li data-bind="text: name, click: $parent.setTheater">San Francisco Playhouse</li>
-			<li data-bind="text: name, click: $parent.setTheater">Thick House</li>
-			<li data-bind="text: name, click: $parent.setTheater">Strand</li>
+			<li data-bind="text: name, click: $parent.setTheater"></li>
 		</ul>
-	<script type="text/javascript" src="js/knockout-latest.js"></script>
+  <div id='map' style="height:500px;"></div>
+<div class="container-fluid">
+  <div class="row">
+    ...
+  </div>
+</div>
+  	<script type="text/javascript" src="js/knockout/knockout-latest.js"></script>
+  	<script src="js/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 	<script src="js/app.js"></script>
 	<script>
 	var googleError = function() {
         alert("Oops! something went wrong, check your internet connection.");
     };
     </script>
-<iframe>
-  width="600"
-  height="450"
-  frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFH3He-WNq1cIYC8T1Cz3iMpxKHf7HsEQ
-    &q=Sanfrancisco+CA" allowfullscreen>
-</iframe>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFH3He-WNq1cIYC8T1Cz3iMpxKHf7HsEQ&callback=initMap"></script>
 </body>
 </html>
