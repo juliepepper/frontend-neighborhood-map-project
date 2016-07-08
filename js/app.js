@@ -81,7 +81,7 @@ var ViewModel = function() {
   var currentAttraction;
   var marker;
   var text;
-  var query = ko.observable("");
+  self.query = ko.observable("");
 
   var TheaterLocation = function(data) {
     this.selected = ko.observable(true);
@@ -148,16 +148,6 @@ var ViewModel = function() {
 
         self.infoWindow.setContent(contentString);
         self.infoWindow.open(map,attraction.marker);
-
-        contentString = '<div id="window-content">'+
-                        '<h4 id="name">'+attraction.name+'</h4>'+
-                        '<h5 id="address">'+data.response.venues[0].location.address+'</h5>'+
-                        '<h5 id="phone">'+data.response.venues[0].contact.formattedPhone+'</h5>'+
-                        '<h6 id="attribution">(Information provided by FourSquare)</h6>'+
-                        '</div>';
-
-        self.infoWindow.setContent(contentString);
-        self.infoWindow.open(map,attraction.marker);
       } else {
         contentString = '<div id="window-content">'+
                         '<h4 id="name">'+attraction.name+'</h4>'+
@@ -178,10 +168,9 @@ var ViewModel = function() {
       }); // Closes $.getJSON()
   }; // Closes setWindow function
 
-
-  this.filter = function() {
-    console.log(query());
-    var lowerCaseQuery = query().toLowerCase();
+ this.filter = function() {
+    console.log(self.query());
+    var lowerCaseQuery = self.query().toLowerCase();
     for (var i=0; i < self.theaterList().length; i++) {
       if (self.theaterList()[i].name.toLowerCase().indexOf(lowerCaseQuery) !== -1) {
         self.theaterList()[i].selected(true);
@@ -194,6 +183,15 @@ var ViewModel = function() {
     }; // Closes for loop
   }; // Closes filter function*/
 
+   self.search = ko.computed(function() {
+    return ko.utils.arrayFilter(self.theaterList(), function(theater){
+      return theater.name.toLowerCase().indexOf(self.query().toLowerCase()) >= 0;
+    });
+  });
+
+self.setTheater = function() {
+  setWindow(this);
+}
   function setMarkerBounce(marker) {
     marker.setAnimation(google.maps.Animation.BOUNCE);
     setTimeout(function () {

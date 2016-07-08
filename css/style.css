@@ -1,5 +1,9 @@
 h1 { font-family:
 'Raleway', sans-serif;
+}
+body {
+  background-color: #dab3ff;
+}
 
 html {
   -webkit-box-sizing: border-box;
