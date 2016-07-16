@@ -8,7 +8,7 @@ var theaterPlaces = [{
     type: 'Theater'
 }, {
 
-    name: "Lorraine_Hansberry_Theater",
+    name: "Lorraine Hansberry Theater",
     position: {
         lat: 37.7883267,
         lng: -122.4137036
@@ -16,7 +16,7 @@ var theaterPlaces = [{
     type: 'Theater'
 }, {
 
-    name: "The_Marsh",
+    name: "The Marsh",
     position: {
         lat: 37.7558531,
         lng: -122.4212321
@@ -24,7 +24,7 @@ var theaterPlaces = [{
     type: 'Theater'
 }, {
 
-    name: "San_Francisco_Playhouse",
+    name: "San Francisco Playhouse",
     position: {
         lat: 37.7883553,
         lng: -122.4094125
@@ -32,7 +32,7 @@ var theaterPlaces = [{
     type: 'Theater'
 }, {
 
-    name: "Thick_House",
+    name: "Thick House",
     position: {
         lat: 37.7620355,
         lng: -122.399214
@@ -95,9 +95,6 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
     map.mapTypes.set('map_style', styledMap);
     map.setMapTypeId('map_style');
-    var googleError = function() {
-        alert("Oops! something went wrong, check your internet connection.");
-    };
 
     ko.applyBindings(new ViewModel());
 }; // Closes InitMap()
@@ -206,11 +203,22 @@ var ViewModel = function() {
                     self.theaterList()[i].marker.setVisible(false);
                 } // Closes If/Else
             }; // Closes for loop
-        }; // Closes filter function*/
+        }; // Closes filter function*/()
 
    self.search = ko.computed(function() {
+    var query = self.query().toLowerCase();
      return ko.utils.arrayFilter(self.theaterList(), function(theater) {
-         return theater.name.toLowerCase().indexOf(self.query().toLowerCase()) >= 0;
+        var theaterName = theater.name.toLowerCase();
+        if (theaterName.indexOf(query) >= 0) {
+            theater.selected(true);
+            theater.marker.setVisible(true);
+            return true;
+        } else {
+            theater.selected(false);
+            theater.marker.setVisible(false);
+            return false;
+        }
+         //return theater.name.toLowerCase().indexOf(self.query().toLowerCase()) >= 0;
      });
  });
 

@@ -16,6 +16,14 @@ html {
   box-sizing: inherit;
   }
 
+  #map {
+    height: 100vh;
+}
+
+li {
+    cursor: pointer;
+}
+
     /*==========  Mobile First Method  ==========*/
 
     /* Custom, iPhone Retina */
